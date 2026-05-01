@@ -18,7 +18,7 @@ FEATURE_NAMES = [
 
 # ── Step 1: Build feature matrix from URLs ────────────────────
 print("Loading URLs...")
-df = pd.read_csv(r'C:\Users\Cypher\3D Objects\projects\Phishing\data\phishing_site_urls.csv')
+df = pd.read_csv(os.path.join(os.path.dirname(__file__), '..', 'data', 'phishing_site_urls.csv'))
 df['label'] = (df['Label'] == 'bad').astype(int)  # bad=1, good=0
 
 print(f"Extracting features from {len(df)} URLs (this may take a few minutes)...")
