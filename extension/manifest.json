@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Phishing Shield",
+    "version": "1.0",
+    "description": "Blocks phishing sites using Random Forest ML",
+    "permissions": [
+        "webnavigation",
+        "tabs",
+        "storage"
+    ],
+    "host_permissions": ["<all_urls>"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "deafult_title": "Phishing Shield",
+        "default_icon": "icon.png"
+    }
+}
