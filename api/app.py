@@ -13,8 +13,14 @@ from features import extract_features
 app = Flask(__name__)
 CORS(app)
 
-# ── Load model ───────────────────────────────
-MODEL_PATH = os.path.join(MODEL_DIR, "phishing_model.pkl")
+# ── Load model from Hugging Face ─────────────
+from huggingface_hub import hf_hub_download
+
+MODEL_PATH = hf_hub_download(
+    repo_id="hex-sentinel/phishing-detector-model",
+    filename="phishing_model.pkl"
+)
+
 model = joblib.load(MODEL_PATH)
 
 # ── Routes ───────────────────────────────────
