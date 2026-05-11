@@ -1,21 +1,24 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from huggingface_hub import hf_hub_download
 import joblib, sys, os
 
-# ── Path setup ───────────────────────────────
-BASE      = os.path.dirname(os.path.dirname(__file__))
+BASE = os.path.dirname(os.path.dirname(__file__))
 MODEL_DIR = os.path.join(BASE, "model")
 sys.path.append(MODEL_DIR)
 
 from features import extract_features
 
-# ── App setup ────────────────────────────────
 app = Flask(__name__)
 CORS(app)
 
-# ── Load model ───────────────────────────────
-MODEL_PATH = os.path.join(MODEL_DIR, "phishing_model.pkl")
+MODEL_PATH = hf_hub_download(
+    repo_id="hex-sentinel/phishing-detector-model",
+    filename="phishing_model.pkl"
+)
+
 model = joblib.load(MODEL_PATH)
+
 
 # ── Routes ───────────────────────────────────
 @app.route('/predict', methods=['POST'])
